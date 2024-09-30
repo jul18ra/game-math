@@ -3,48 +3,68 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.VisualScripting.Metadata;
 
 // The TransformSynchronizer class syncs the positions 
 // and rotations of specified child transforms in relation to a parent transform.
 
 public class TransformSynchronizer : MonoBehaviour
 {
-    private Vector3[] relativePositions;
-    private Quaternion[] relativeRotations;
+    [System.Serializable]
+    public class TransformPair
+    {
+        public Transform parent;
+        public Transform[] children;
 
-    public Transform trolley, nearLimit, farLimit, cable, hook;
+        internal List<Vector3> relativePositions = new List<Vector3>();
+        internal List<Quaternion> relativeRotations = new List<Quaternion>();
+    }
 
-    private Transform[] craneChildren;
-    public Transform[] CraneChildren { get { return craneChildren; } }
+    public TransformPair[] transformPairs;
 
     private void Start()
     {
-        craneChildren = new Transform[]
-        {
-            trolley, nearLimit, farLimit
-        };
-
-        relativePositions = new Vector3[craneChildren.Length];
-        relativeRotations = new Quaternion[craneChildren.Length];
+        UpdateAllRelativeTransforms();
     }
 
-    public void UpdateRelativeTransform(Transform[] children, Transform parent)
+    public void UpdateRelativeTransform(TransformPair pair, Transform child)
     {
-        for (int i = 0; i < children.Length; i++)
+        pair.relativePositions.Add(pair.parent.InverseTransformPoint(child.position));
+        pair.relativeRotations.Add(Quaternion.Inverse(pair.parent.rotation) * child.rotation);
+    }
+
+    public void UpdateAllRelativeTransforms()
+    {
+        foreach (var pair in transformPairs)
         {
-            relativePositions[i] = parent.InverseTransformPoint(children[i].position);
-            relativeRotations[i] = Quaternion.Inverse(parent.rotation) * children[i].rotation;
+            pair.relativePositions.Clear();
+            pair.relativeRotations.Clear();
+
+            foreach (var child in pair.children)
+            {
+                UpdateRelativeTransform(pair, child);
+            }
         }
     }
 
-    public void SyncTransform(Transform[] children, Transform parent)
+    private void SyncTransform(TransformPair pair, Transform child, int index)
     {
-        for (int i = 0; i < children.Length; i++)
+        if (index >= 0 && index < pair.relativePositions.Count)
         {
-            children[i].position = parent.TransformPoint(relativePositions[i]);
-            children[i].rotation = parent.rotation * relativeRotations[i];
+            child.position = pair.parent.TransformPoint(pair.relativePositions[index]);
+            child.rotation = pair.parent.rotation * pair.relativeRotations[index];
         }
-
     }
 
-}
+    public void SyncAllTransforms()
+    {
+        foreach (var pair in transformPairs)
+        {
+            for (int i = 0; i < pair.children.Length; i++)
+                {
+                    var child = pair.children[i];
+                    SyncTransform(pair, child, i);
+                }
+            }
+        }
+    }

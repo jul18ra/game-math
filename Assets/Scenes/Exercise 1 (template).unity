@@ -305,11 +305,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13af45f498c5a24385acd49d1c662b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trolley: {fileID: 8658184023392300784}
-  nearLimit: {fileID: 601031390}
-  farLimit: {fileID: 363527139}
-  cable: {fileID: 8658184023392300798}
-  hook: {fileID: 8658184023392300786}
+  transformPairs:
+  - parent: {fileID: 8658184023392300794}
+    children:
+    - {fileID: 8658184023392300784}
+    - {fileID: 601031390}
+    - {fileID: 363527139}
+  - parent: {fileID: 8658184023392300784}
+    children:
+    - {fileID: 8658184023392300798}
+  - parent: {fileID: 8658184023392300798}
+    children:
+    - {fileID: 8658184023392300786}
 --- !u!114 &1457347137 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8690616484941123924, guid: 85e1ce8fbcff6f042a34bee9779e8146, type: 3}
@@ -1420,7 +1427,6 @@ MonoBehaviour:
   transformSync: {fileID: 971392362}
   leftButton: {fileID: 952940313}
   rightButton: {fileID: 1457347137}
-  trolley: {fileID: 8658184023395725023}
 --- !u!33 &8658184023395725018
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1460,7 +1466,6 @@ MonoBehaviour:
   transformSync: {fileID: 971392362}
   nearLimitObject: {fileID: 601031390}
   farLimitObject: {fileID: 363527139}
-  crane: {fileID: 8658184023392300794}
 --- !u!1001 &8685051053018706934
 PrefabInstance:
   m_ObjectHideFlags: 0

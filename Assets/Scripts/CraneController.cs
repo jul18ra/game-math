@@ -7,14 +7,7 @@ public class CraneController : MonoBehaviour
 
     private Vector3 yAxis = new(0, 1, 0);
     public HoldableButton leftButton, rightButton;
-    public TrolleyController trolley;
     private int craneSpeed = 20;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        transformSync.UpdateRelativeTransform(transformSync.CraneChildren, transform);
-    }
 
     private void Update()
     {
@@ -37,7 +30,7 @@ public class CraneController : MonoBehaviour
         if (rotationDirection != 0f)
         {
             transform.Rotate(yAxis, rotationDirection);
-            transformSync.SyncTransform(transformSync.CraneChildren, transform);
+            transformSync.SyncAllTransforms();
         }
     }
 }
