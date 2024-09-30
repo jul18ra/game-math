@@ -5,6 +5,8 @@ using static UnityEngine.Rendering.DebugUI;
 public class TrolleyController : MonoBehaviour
 {
     public TransformSynchronizer transformSync;
+    public HookController hook;
+
     public Transform nearLimitObject, farLimitObject;
     private Vector3 nearLimit, farLimit;
 
@@ -21,6 +23,12 @@ public class TrolleyController : MonoBehaviour
 
         // Syncs hook with cable
         transformSync.SyncTransform(transformSync.transformPairs[2], transformSync.transformPairs[2].children[0], 0);
+
+        // Syncs concrete with hook
+        if (hook.isHooked)
+        {
+            transformSync.SyncTransform(transformSync.transformPairs[3], transformSync.transformPairs[3].children[0], 0);
+        }
 
         transformSync.UpdateAllRelativeTransforms();
     }

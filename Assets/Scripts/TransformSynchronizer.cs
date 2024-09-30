@@ -20,7 +20,7 @@ public class TransformSynchronizer : MonoBehaviour
         internal List<Quaternion> relativeRotations = new List<Quaternion>();
     }
 
-    public TransformPair[] transformPairs;
+    public List<TransformPair> transformPairs = new List<TransformPair>();
 
     private void Start()
     {
@@ -61,10 +61,23 @@ public class TransformSynchronizer : MonoBehaviour
         foreach (var pair in transformPairs)
         {
             for (int i = 0; i < pair.children.Length; i++)
-                {
-                    var child = pair.children[i];
-                    SyncTransform(pair, child, i);
-                }
+            {
+                var child = pair.children[i];
+                SyncTransform(pair, child, i);
             }
+
         }
     }
+
+    public void AddTransformPair(Transform parent, Transform[] children)
+    {
+        TransformPair newPair = new TransformPair
+        {
+            parent = parent,
+            children = children
+        };
+        transformPairs.Add(newPair);
+    }
+}
+
+
