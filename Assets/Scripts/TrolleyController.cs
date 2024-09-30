@@ -15,6 +15,10 @@ public class TrolleyController : MonoBehaviour
 
         Vector3 trolleyPos = Vector3.Lerp(farLimit, nearLimit, value);
         transform.position = trolleyPos;
+
+        // Syncs cable with trolley
+        transformSync.SyncTransform(transformSync.transformPairs[1], transformSync.transformPairs[1].children[0], 0);
+
         transformSync.UpdateAllRelativeTransforms();
     }
 }

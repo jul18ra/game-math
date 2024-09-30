@@ -47,7 +47,7 @@ public class TransformSynchronizer : MonoBehaviour
         }
     }
 
-    private void SyncTransform(TransformPair pair, Transform child, int index)
+    public void SyncTransform(TransformPair pair, Transform child, int index)
     {
         if (index >= 0 && index < pair.relativePositions.Count)
         {
