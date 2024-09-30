@@ -19,6 +19,9 @@ public class TrolleyController : MonoBehaviour
         // Syncs cable with trolley
         transformSync.SyncTransform(transformSync.transformPairs[1], transformSync.transformPairs[1].children[0], 0);
 
+        // Syncs hook with cable
+        transformSync.SyncTransform(transformSync.transformPairs[2], transformSync.transformPairs[2].children[0], 0);
+
         transformSync.UpdateAllRelativeTransforms();
     }
 }
