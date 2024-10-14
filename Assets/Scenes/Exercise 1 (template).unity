@@ -271,8 +271,9 @@ GameObject:
   m_Component:
   - component: {fileID: 971392361}
   - component: {fileID: 971392362}
+  - component: {fileID: 971392363}
   m_Layer: 0
-  m_Name: TransformSynchronizer
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -317,6 +318,19 @@ MonoBehaviour:
   - parent: {fileID: 8658184023392300798}
     children:
     - {fileID: 8658184023392300786}
+--- !u!114 &971392363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971392360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b40816f3f0c0e14b86fd2b9d78e9c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crane: {fileID: 8658184023395725017}
 --- !u!114 &1457347137 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8690616484941123924, guid: 85e1ce8fbcff6f042a34bee9779e8146, type: 3}
@@ -716,7 +730,7 @@ GameObject:
   - component: {fileID: 6023892515792707299}
   m_Layer: 0
   m_Name: Concrete
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1518,8 +1532,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformSync: {fileID: 971392362}
+  trolley: {fileID: 8658184023395725023}
   leftButton: {fileID: 952940313}
   rightButton: {fileID: 1457347137}
+  isRotating: 0
 --- !u!33 &8658184023395725018
 MeshFilter:
   m_ObjectHideFlags: 0
