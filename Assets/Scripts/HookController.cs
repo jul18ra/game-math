@@ -9,9 +9,14 @@ public class HookController : MonoBehaviour
 
     private void OnTriggerEnter(Collider concrete)
     {
+        AttachToHook(concrete);
+    }
+
+    private void AttachToHook(Collider collider)
+    {
         if (!isHooked)
         {
-            Transform[] concreteTransform = { concrete.transform };
+            Transform[] concreteTransform = { collider.transform };
             transformSync.AddTransformPair(transform, concreteTransform);
             isHooked = true;
         }
