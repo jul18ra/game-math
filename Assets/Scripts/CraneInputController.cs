@@ -7,6 +7,8 @@ using static UnityEditor.PlayerSettings;
 public class CraneInputController : MonoBehaviour
 {
     public CraneController crane;
+    public TrolleyController trolley;
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -31,7 +33,15 @@ public class CraneInputController : MonoBehaviour
         if (hit.collider.CompareTag("Concrete") && !crane.isRotating)
         {
             Transform concrete = hit.collider.gameObject.transform;
-            StartCoroutine(crane.RotateTowards(concrete));
+            StartCoroutine(CraneSequence(concrete));
         }
     }
+
+    private IEnumerator CraneSequence(Transform target)
+    {
+        yield return crane.RotateTowards(target);
+        yield return trolley.MoveTrolleyTowards(target);
+    }
 }
+
+   

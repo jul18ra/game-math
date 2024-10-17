@@ -331,6 +331,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crane: {fileID: 8658184023395725017}
+  trolley: {fileID: 8658184023395725023}
+  concrete: {fileID: 6023892515792536319}
 --- !u!114 &1457347137 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8690616484941123924, guid: 85e1ce8fbcff6f042a34bee9779e8146, type: 3}
@@ -1587,6 +1589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transformSync: {fileID: 971392362}
   hook: {fileID: 8658184023395725012}
+  concrete: {fileID: 6023892515792536319}
   nearLimitObject: {fileID: 601031390}
   farLimitObject: {fileID: 363527139}
 --- !u!1001 &8685051053018706934

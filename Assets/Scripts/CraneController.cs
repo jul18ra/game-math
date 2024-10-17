@@ -13,6 +13,7 @@ public class CraneController : MonoBehaviour
     private int craneSpeed = 20;
 
     public bool isRotating = false;
+    private float maxAngleError = 0.1f;
 
     private void Update()
     {
@@ -55,7 +56,7 @@ public class CraneController : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, craneSpeed * Time.deltaTime);
             transformSync.SyncAllTransforms();
 
-            if (Quaternion.Angle(transform.rotation, targetRot) < 0.1f)
+            if (Quaternion.Angle(transform.rotation, targetRot) < maxAngleError)
             {
                 isRotating = false;
             }
@@ -63,7 +64,5 @@ public class CraneController : MonoBehaviour
             yield return null;
 
         }
-
-        transform.rotation = targetRot;
     }
 }
