@@ -6,7 +6,6 @@ using static UnityEngine.Rendering.DebugUI;
 public class TrolleyController : MonoBehaviour
 {
     public TransformSynchronizer transformSync;
-    public HookController hook;
     public Transform concrete;
 
     public Transform nearLimitObject, farLimitObject;
@@ -22,8 +21,6 @@ public class TrolleyController : MonoBehaviour
 
         Vector3 trolleyPos = Vector3.Lerp(farLimit, nearLimit, value);
         transform.position = trolleyPos;
-
-        TrolleySync();
     }
 
     public IEnumerator MoveTrolleyTowards(Transform target)
@@ -51,26 +48,8 @@ public class TrolleyController : MonoBehaviour
             trolleyPosProjected = Vector3.ProjectOnPlane(transform.position, Vector3.up);
             distance = Vector3.Distance(trolleyPosProjected, targetPosProjected);
 
-            TrolleySync();
-
             yield return null;
         }
     }
 
-    private void TrolleySync()
-    {
-        // Syncs cable with trolley
-        transformSync.SyncTransform(transformSync.transformPairs[1], transformSync.transformPairs[1].children[0], 0);
-
-        // Syncs hook with cable
-        transformSync.SyncTransform(transformSync.transformPairs[2], transformSync.transformPairs[2].children[0], 0);
-
-        // Syncs concrete with hook
-        if (hook.isHooked)
-        {
-            transformSync.SyncTransform(transformSync.transformPairs[3], transformSync.transformPairs[3].children[0], 0);
-        }
-
-        transformSync.UpdateAllRelativeTransforms();
-    }
 }

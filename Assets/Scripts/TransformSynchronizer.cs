@@ -22,9 +22,16 @@ public class TransformSynchronizer : MonoBehaviour
 
     public List<TransformPair> transformPairs = new List<TransformPair>();
 
+    public HookController hook;
+
     private void Start()
     {
         UpdateAllRelativeTransforms();
+    }
+
+    private void Update()
+    {
+        TrolleySync();
     }
 
     public void UpdateRelativeTransform(TransformPair pair, Transform child)
@@ -78,6 +85,25 @@ public class TransformSynchronizer : MonoBehaviour
         };
         transformPairs.Add(newPair);
     }
+
+    // Syncs parts of the trolley
+    private void TrolleySync()
+    {
+        // Syncs cable with trolley
+        SyncTransform(transformPairs[1], transformPairs[1].children[0], 0);
+
+        // Syncs hook with cable
+        SyncTransform(transformPairs[2], transformPairs[2].children[0], 0);
+
+        // Syncs concrete with hook
+        if (hook.isHooked)
+        {
+            SyncTransform(transformPairs[3], transformPairs[3].children[0], 0);
+        }
+
+        UpdateAllRelativeTransforms();
+    }
+
 }
 
 

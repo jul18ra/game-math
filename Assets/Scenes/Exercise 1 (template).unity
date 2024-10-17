@@ -318,6 +318,7 @@ MonoBehaviour:
   - parent: {fileID: 8658184023392300798}
     children:
     - {fileID: 8658184023392300786}
+  hook: {fileID: 8658184023395725012}
 --- !u!114 &971392363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crane: {fileID: 8658184023395725017}
   trolley: {fileID: 8658184023395725023}
-  concrete: {fileID: 6023892515792536319}
+  cable: {fileID: 8658184023395725021}
 --- !u!114 &1457347137 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8690616484941123924, guid: 85e1ce8fbcff6f042a34bee9779e8146, type: 3}
@@ -1567,6 +1568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformSync: {fileID: 971392362}
+  hook: {fileID: 8658184023395725010}
 --- !u!33 &8658184023395725022
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1588,7 +1590,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformSync: {fileID: 971392362}
-  hook: {fileID: 8658184023395725012}
   concrete: {fileID: 6023892515792536319}
   nearLimitObject: {fileID: 601031390}
   farLimitObject: {fileID: 363527139}
