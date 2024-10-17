@@ -21,4 +21,10 @@ public class HookController : MonoBehaviour
             isHooked = true;
         }
     }
+
+    public void Unhook()
+    {
+        isHooked = false;
+        transformSync.RemoveTransformPair(transform);
+    }
 }

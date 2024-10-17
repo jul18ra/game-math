@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
@@ -9,6 +10,8 @@ public class CraneActionManager : MonoBehaviour
     public CraneController crane;
     public TrolleyController trolley;
     public CableController cable;
+    public HookController hook;
+    public ConcreteTeleporter concrete;
 
     void Update()
     {
@@ -46,6 +49,11 @@ public class CraneActionManager : MonoBehaviour
         yield return crane.RotateTowards(targetTransform);
         yield return trolley.MoveTrolleyTowards(targetTransform);
         yield return cable.AdjustCableScale(targetSphereCollider);
+
+        yield return new WaitForSeconds(1);
+
+        hook.Unhook();
+        concrete.Teleport();
     }
 }
 

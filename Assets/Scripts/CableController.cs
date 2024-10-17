@@ -24,6 +24,7 @@ public class CableController : MonoBehaviour
         float targetPos = target.bounds.center.y;
         float hookPos = hook.bounds.center.y;
 
+        // Lower cable
         while (hookPos > targetPos)
         {
             cableScale += scaleIncrement * Time.deltaTime;
@@ -34,6 +35,7 @@ public class CableController : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
+        // Lift cable
         while (cableScale > minScale)
         {
             cableScale -= scaleIncrement * Time.deltaTime;

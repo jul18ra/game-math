@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Unity.VisualScripting.Metadata;
@@ -85,6 +86,13 @@ public class TransformSynchronizer : MonoBehaviour
         };
         transformPairs.Add(newPair);
     }
+
+    public void RemoveTransformPair(Transform parent)
+    {
+        TransformPair pairToRemove = transformPairs.FirstOrDefault(pair => pair.parent == parent);
+        transformPairs.Remove(pairToRemove);
+    }
+
 
     // Syncs parts of the trolley
     private void TrolleySync()

@@ -335,6 +335,8 @@ MonoBehaviour:
   crane: {fileID: 8658184023395725017}
   trolley: {fileID: 8658184023395725023}
   cable: {fileID: 8658184023395725021}
+  hook: {fileID: 8658184023395725012}
+  concrete: {fileID: 6023892515792707299}
 --- !u!114 &971392364
 MonoBehaviour:
   m_ObjectHideFlags: 0
