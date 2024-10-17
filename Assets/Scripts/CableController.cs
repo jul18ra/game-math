@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static UnityEngine.Rendering.DebugUI;
 
 public class CableController : MonoBehaviour
@@ -9,6 +10,7 @@ public class CableController : MonoBehaviour
     public TransformSynchronizer transformSync;
     public Collider hook;
     private float scaleIncrement = 0.4f;
+    private float minScale = 0.04f;
 
     public void ScaleCable(float cableScale)
     {
@@ -27,6 +29,15 @@ public class CableController : MonoBehaviour
             cableScale += scaleIncrement * Time.deltaTime;
             ScaleCable(cableScale);
             hookPos = hook.bounds.center.y;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1);
+
+        while (cableScale > minScale)
+        {
+            cableScale -= scaleIncrement * Time.deltaTime;
+            ScaleCable(Mathf.Max(cableScale, minScale));
             yield return null;
         }
     }
