@@ -4,12 +4,11 @@ using Unity.Burst.CompilerServices;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
-public class CraneInputController : MonoBehaviour
+public class CraneActionManager : MonoBehaviour
 {
     public CraneController crane;
     public TrolleyController trolley;
     public CableController cable;
-
 
     void Update()
     {
