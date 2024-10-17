@@ -40,7 +40,7 @@ public class CraneController : MonoBehaviour
         }
     }
 
-    public IEnumerator RotateTowards(Transform target)
+    public IEnumerator RotateCraneTowards(Transform target)
     {
         isRotating = true;
 

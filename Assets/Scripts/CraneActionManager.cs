@@ -26,6 +26,7 @@ public class CraneActionManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
 
+        // Check if ray hits an object
         if (Physics.Raycast(ray, out hit))
         {
             HandleHitObject(hit);
@@ -46,7 +47,7 @@ public class CraneActionManager : MonoBehaviour
         Transform targetTransform = target.transform;
         Collider targetSphereCollider = target.GetComponent<SphereCollider>();
 
-        yield return crane.RotateTowards(targetTransform);
+        yield return crane.RotateCraneTowards(targetTransform);
         yield return trolley.MoveTrolleyTowards(targetTransform);
         yield return cable.AdjustCableScale(targetSphereCollider);
 
