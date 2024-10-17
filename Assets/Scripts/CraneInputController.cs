@@ -8,6 +8,8 @@ public class CraneInputController : MonoBehaviour
 {
     public CraneController crane;
     public TrolleyController trolley;
+    public CableController cable;
+
 
     void Update()
     {
@@ -32,15 +34,19 @@ public class CraneInputController : MonoBehaviour
     {
         if (hit.collider.CompareTag("Concrete") && !crane.isRotating)
         {
-            Transform concrete = hit.collider.gameObject.transform;
+            GameObject concrete = hit.transform.gameObject;
             StartCoroutine(CraneSequence(concrete));
         }
     }
 
-    private IEnumerator CraneSequence(Transform target)
+    private IEnumerator CraneSequence(GameObject target)
     {
-        yield return crane.RotateTowards(target);
-        yield return trolley.MoveTrolleyTowards(target);
+        Transform targetTransform = target.transform;
+        Collider targetSphereCollider = target.GetComponent<SphereCollider>();
+
+        yield return crane.RotateTowards(targetTransform);
+        yield return trolley.MoveTrolleyTowards(targetTransform);
+        yield return cable.AdjustCableScale(targetSphereCollider);
     }
 }
 
